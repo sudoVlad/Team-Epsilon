@@ -115,3 +115,6 @@ coverage.xml
 
 # Sphinx documentation
 docs/_build/
+
+#Created Database files
+db.sqlite3

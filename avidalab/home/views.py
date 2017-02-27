@@ -2,4 +2,6 @@ from django.shortcuts import render
 from django.http import HttpResponse
 # Create your views here.
 def home_page(request):
-    return HttpResponse('<html><title>Home-Page</title></html>')
+    return HttpResponse('<html><title>Home-Page</title>' \
+                        '<BODY><IMG SRC="https://media.giphy.com/media/M7gtacN7aPNsc/giphy.gif">' \
+                        '</BODY></html>')

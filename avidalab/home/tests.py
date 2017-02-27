@@ -17,4 +17,5 @@ class HomePageTest(TestCase):
         html = response.content.decode('utf8')
         self.assertTrue(html.startswith('<html>'))
         self.assertIn('<title>Home-Page</title>', html)
+        self.assertIn('<BODY><IMG SRC="https://media.giphy.com/media/M7gtacN7aPNsc/giphy.gif"></BODY>', html)
         self.assertTrue(html.endswith('</html>'))

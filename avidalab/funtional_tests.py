@@ -1,6 +1,8 @@
 from selenium import webdriver
 import unittest
 from django.test import TestCase
+from django.urls import reverse
+from django.urls import resolve
 
 class HomePageTest(TestCase):
 
@@ -8,27 +10,27 @@ class HomePageTest(TestCase):
         self.browser = webdriver.Firefox()
 
     def tearDown(self):
-        self.browser.quit()
+      self.browser.quit()
 
-    """
-    def test_can_start_a_home_and_retrieve_it_later(self):
-        # Edith has heard about a cool new online to-do app. She goes
-        # to check out its homepage
-        self.browser.get('http://localhost:8000')
 
-        # She notices the page title and header mention to-do lists
-        self.assertIn('Home-Page', self.browser.title)
-        # self.fail('Finish the test!')
+    def test_urls_go_to_the_right_place(self):
+        #ensure we can connect with a / root
+        response = self.client.get('/', follow=True)
+        print(response.redirect_chain)
+        self.assertEquals(response.status_code, 200)
 
-        # She is invited to enter a to-do item straight away
-    """
+        # ensure we can connect with a /home/ root
+        response = self.client.get('/home/', follow=True)
+        print(response.redirect_chain)
+        self.assertEquals(response.status_code, 200)
 
-    def test_can_redirect_to_home(self):
-        #When we go to localhost:8000 we want to be redirected to lcoalhost:8000/home/
+        #Make sure we can connect to the home page
+        response = self.client.get(reverse('index'))
+        self.assertEqual(response.status_code, 200)
 
-        response = self.client.get('http://localhost:8000')
-        self.assertRedirects(response, 'http://localhost:8000/home/', status_code=400, target_status_code=200, host=None, msg_prefix='', \
-                        fetch_redirect_response=True)
+
+
+
 
 if __name__ == '__main__':
     unittest.main(warnings='ignore')

@@ -28,8 +28,14 @@ urlpatterns += [
 ]
 
 urlpatterns += [
+    url(r'^import/', include('import.urls')),
+]
+
+urlpatterns += [
     url(r'^$', RedirectView.as_view(url='/home/', permanent=True)),
 ]
+
+
 
 # Use static() to add url mapping to serve static files during development (only)
 from django.conf import settings

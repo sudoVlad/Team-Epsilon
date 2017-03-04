@@ -46,7 +46,21 @@ class ImportPageTest(TestCase):
         response = self.client.get(reverse('import/index'))
         self.assertEqual(response.status_code, 200)
 
+class AnalysisPageTestCase(TestCase):
+    def setUp(self):
+        self.browser = webdriver.Firefox()
 
+    def tearDown(self):
+        self.browser.quit()
+
+    def test_urls_go_to_the_right_place(self):
+        #test if /analysis goes to the analysis page
+        response = self.client.get('/analysis/', follow=True)
+        print(response.redirect_chain)
+        self.assertEquals(response.status_code, 200)
+
+        response = self.client.get(reverse('analysis/index'))
+        self.assertEqual(response.status_code, 200)
 
 if __name__ == '__main__':
     unittest.main(warnings='ignore')

@@ -31,9 +31,14 @@ urlpatterns += [
     url(r'^import/', include('import.urls')),
 ]
 
+urlpatterns +={
+    url(r'^analysis/', include('analysis.urls')),
+}
+
 urlpatterns += [
     url(r'^$', RedirectView.as_view(url='/home/', permanent=True)),
 ]
+
 
 
 

@@ -39,6 +39,9 @@ urlpatterns += [
     url(r'^$', RedirectView.as_view(url='/home/', permanent=True)),
 ]
 
+urlpatterns += [
+    url(r'^contact/', include('contact.urls')),
+]
 
 
 

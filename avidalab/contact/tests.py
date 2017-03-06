@@ -2,17 +2,14 @@ from django.core.urlresolvers import resolve
 from django.test import TestCase
 from django.http import HttpRequest
 from django import forms
-from contact.views import contact
 
 # Create your tests here.
 class ContactPageTest(TestCase):
-    def test_root_url_resolves_to_contact_page_view(self):
-        found = resolve('/contact/')
-        self.assertEqual(found.func, contact)
+
 
     def test_contact_page_returns_correct_html(self):
         response = self.client.get('/contact/')
-        self.assertTemplateUsed(response, 'contact.html')
+        self.assertTemplateUsed(response, 'contact_index.html')
 
     def test_contact_page_returns_basic_form(self):
         response = self.client.get('/contact/')

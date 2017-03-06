@@ -43,6 +43,17 @@ class ImportPageTest(TestCase):
         response = self.client.get(reverse('import/index'))
         self.assertEqual(response.status_code, 200)
 
+class ContactPageTestCase(TestCase):
+    def setUp(self):
+        self.browser = webdriver.Firefox()
+
+    def tearDown(self):
+        self.browser.quit()
+
+    def test_root_url_resolves_to_contact_page_view(self):
+        found = self.client.get('/contact/')
+        self.assertEqual(found.status_code, 200)
+
 
 class AnalysisPageTestCase(TestCase):
     def setUp(self):

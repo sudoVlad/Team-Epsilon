@@ -1,8 +1,8 @@
 from django.conf.urls import url
-
+from django.conf import settings
+from django.conf.urls.static import static
 from . import views
 
-
 urlpatterns = [
-    url(r'^$import/', views.index, name='index'),
-]
+    url(r'^$', import.index, name='index'),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

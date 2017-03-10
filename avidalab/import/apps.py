@@ -1,5 +1,6 @@
-from django.apps import AppConfig
+# -*- coding: utf-8 -*-
+from django.conf.urls import patterns, url
 
-
-class ImportConfig(AppConfig):
-    name = 'import'
+urlpatterns = patterns('myapp.views',
+    url(r'^list/$', 'list', name='list'),
+)

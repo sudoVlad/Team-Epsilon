@@ -26,11 +26,11 @@ urlpatterns = [
 urlpatterns += [
     url(r'^home/', include('home.urls')),
 ]
-
+'''
 urlpatterns += [
     url(r'^import/', include('import.urls')),
 ]
-
+'''
 urlpatterns +={
     url(r'^analysis/', include('analysis.urls')),
 }

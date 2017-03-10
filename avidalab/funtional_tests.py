@@ -6,11 +6,7 @@ from django.urls import resolve
 
 class HomePageTest(TestCase):
 
-    def setUp(self):
-        self.browser = webdriver.Firefox()
 
-    def tearDown(self):
-      self.browser.quit()
 
 
     def test_urls_go_to_the_right_place(self):
@@ -26,11 +22,7 @@ class HomePageTest(TestCase):
 
 
 class ImportPageTest(TestCase):
-    def setUp(self):
-        self.browser = webdriver.Firefox()
 
-    def tearDown(self):
-        self.browser.quit()
 
     def test_urls_go_to_the_right_place(self):
         #ensure we can connect with a /import/
@@ -44,11 +36,7 @@ class ImportPageTest(TestCase):
         self.assertEqual(response.status_code, 200)
 
 class ContactPageTestCase(TestCase):
-    def setUp(self):
-        self.browser = webdriver.Firefox()
 
-    def tearDown(self):
-        self.browser.quit()
 
     def test_root_url_resolves_to_contact_page_view(self):
         found = self.client.get('/contact/')
@@ -56,11 +44,7 @@ class ContactPageTestCase(TestCase):
 
 
 class AnalysisPageTestCase(TestCase):
-    def setUp(self):
-        self.browser = webdriver.Firefox()
 
-    def tearDown(self):
-        self.browser.quit()
 
     def test_urls_go_to_the_right_place(self):
         #test if /analysis goes to the analysis page

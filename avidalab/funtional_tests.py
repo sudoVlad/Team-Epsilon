@@ -1,4 +1,4 @@
-from selenium import webdriver
+import selenium
 import unittest
 from django.test import TestCase
 from django.urls import reverse

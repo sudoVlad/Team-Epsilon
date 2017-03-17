@@ -9,7 +9,7 @@ class ContactPageTest(TestCase):
 
     def test_contact_page_returns_correct_html(self):
         response = self.client.get('/contact/')
-        self.assertTemplateUsed(response, 'contact_index.html')
+        self.assertTemplateUsed(response, 'contact.html')
 
     def test_contact_page_returns_basic_form(self):
         response = self.client.get('/contact/')

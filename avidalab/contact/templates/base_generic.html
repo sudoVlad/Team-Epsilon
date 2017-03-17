@@ -22,10 +22,10 @@
       <div class="col-sm-2">
       {% block sidebar %}
       <ul class="sidebar-nav">
-          <li><a href="http://localhost:8000/home/">Home</a></li>
+          <li><a href="{% url 'index' %}">Home</a></li>
           <li><a href="">Import</a></li>
           <li><a href="{% url 'analysis' %}">Analysis</a></li>
-          <li><a href="http://localhost:8000/contact/">Contact Us</a></li>
+          <li><a href="{% url 'contact' %}">Contact Us</a></li>
       </ul>
      {% endblock %}
       </div>

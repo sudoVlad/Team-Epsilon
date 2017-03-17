@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 
 # Create your views here.
-def index(request):
+def contact(request):
     return render(request,
-                  'contact_index.html',
+                  'contact.html',
                   )

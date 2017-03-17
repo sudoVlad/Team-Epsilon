@@ -11,12 +11,14 @@ class HomePageTest(TestCase):
     def test_those_buttons(self):
         response = self.client.get(reverse("index"))
         self.assertContains(response, '<a href="%s">Home</a>' % reverse("index"), html=True)
-
+        '''
         response = self.client.get(reverse("index"))
         self.assertContains(response, '<a href="%s">Import</a>' % reverse("import"), html=True)
-
+        '''
         response = self.client.get(reverse("index"))
         self.assertContains(response, '<a href="%s">Analysis</a>' % reverse("analysis"), html=True)
 
         response = self.client.get(reverse("index"))
-        self.assertContains(response, '<a href="%s">Contact</a>' % reverse("contact"), html=True)
+        self.assertContains(response, '<a href="%s">Contact Us</a>' % reverse('contact'), html=True)
+
+

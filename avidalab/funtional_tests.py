@@ -17,7 +17,7 @@ class HomePageTest(TestCase):
 
         # ensure we can connect with a /home/ root
         response = self.client.get('/home/', follow=True)
-        print(response.redirect_chain)
+        #print(response.redirect_chain)
         self.assertEquals(response.status_code, 200)
 
 '''
@@ -39,7 +39,8 @@ class ContactPageTestCase(TestCase):
 
 
     def test_root_url_resolves_to_contact_page_view(self):
-        found = self.client.get('/contact/')
+        found = self.client.get('/contact/', follow=True)
+        #print(found.redirect_chain)
         self.assertEqual(found.status_code, 200)
 
 
@@ -49,7 +50,7 @@ class AnalysisPageTestCase(TestCase):
     def test_urls_go_to_the_right_place(self):
         #test if /analysis goes to the analysis page
         response = self.client.get('/analysis/', follow=True)
-        print(response.redirect_chain)
+        #print(response)
         self.assertEquals(response.status_code, 200)
 
 

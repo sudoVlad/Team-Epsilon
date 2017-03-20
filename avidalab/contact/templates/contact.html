@@ -3,23 +3,37 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'css/styles.css' %}"> {% block content %}
 <h1>AvidaLab Contact Us Page<h1>
-  <form id="contact" action="" method="post">
+  <form method="post">
+    {% csrf_token %}
     <h2>Contact us by filling out the form below</h2>
     <fieldset>
-      <input placeholder="Your name" type="text" tabindex="1" required autofocus>
+      Name:
+      {{ form.name }}
+      {{ form.name.errors }}
     </fieldset>
     <fieldset>
-      <input placeholder="Your Email Address" type="email" tabindex="2" required>
+      Phone:
+      {{ form.phone }}
+      {{ form.phone.errors }}
     </fieldset>
     <fieldset>
-      <input placeholder="Your Phone Number" type="tel" tabindex="3" required>
+      Email:
+      {{ form.email }}
+      {{ form.email.errors }}
     </fieldset>
     <fieldset>
-      <textarea placeholder="Type your Message Here...." tabindex="5" required></textarea>
+      Subject:
+      {{ form.subject }}
+      {{ form.subject.errors }}
     </fieldset>
     <fieldset>
-      <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Submit</button>
+      Message:
+      {{ form.message }}
+      {{ form.message.errors }}
     </fieldset>
+    <div class="form-actions">
+      <button type="submit">Send</button>
+    </div>
   </form>
 
 {% endblock %}

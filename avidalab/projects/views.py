@@ -36,13 +36,17 @@ def list(request):
 from django.shortcuts import get_object_or_404
 
 def delete(request):
-    print('step 1')
+    #print('step 1')
+    #the first thing you do is you do a get with post
     docId = request.POST.get('deletethis', None)
-    print(docId)
+    #print(docId)
+    #we then query the database for the object to delete
     docToDel = get_object_or_404(Project, pk = docId)
-    print(docToDel)
+    #print(docToDel)
+    #We then call the delete function on the file
     docToDel.source.delete()
-    print('deleting')
+    #print('deleting')
+    #Then we call the delete function on the object in the database
     docToDel.delete()
 
     return HttpResponseRedirect(reverse('projects'))

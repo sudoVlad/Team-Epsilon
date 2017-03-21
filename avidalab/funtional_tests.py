@@ -53,6 +53,19 @@ class AnalysisPageTestCase(TestCase):
         #print(response)
         self.assertEquals(response.status_code, 200)
 
+class ProjectsPageTestCase(TestCase):
+
+    def test_urls_go_to_the_right_place(self):
+        # test if /projects/ goes to the project page
+        response = self.client.get('/projects/', follow=True)
+        # print(response)
+        self.assertEquals(response.status_code, 200)
+
+        # test if /projects/delete goes to 404
+        response = self.client.get(reverse('delete'), follow=True)
+        # print(response)
+        self.assertEquals(response.status_code, 404)
+
 
 if __name__ == '__main__':
     unittest.main(warnings='ignore')

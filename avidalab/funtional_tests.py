@@ -5,10 +5,6 @@ from django.urls import reverse
 from django.urls import resolve
 
 class HomePageTest(TestCase):
-
-
-
-
     def test_urls_go_to_the_right_place(self):
         #ensure we can connect with a / root
         response = self.client.get('/', follow=True)
@@ -20,21 +16,7 @@ class HomePageTest(TestCase):
         #print(response.redirect_chain)
         self.assertEquals(response.status_code, 200)
 
-'''
-class ImportPageTest(TestCase):
 
-
-    def test_urls_go_to_the_right_place(self):
-        #ensure we can connect with a /import/
-        response = self.client.get('/import/', follow=True)
-        print(response.redirect_chain)
-        self.assertEquals(response.status_code, 200)
-
-
-        #Make sure we can connect to the home page
-        response = self.client.get(reverse('import/index'))
-        self.assertEqual(response.status_code, 200)
-'''
 class ContactPageTestCase(TestCase):
 
 

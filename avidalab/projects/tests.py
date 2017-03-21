@@ -2,7 +2,14 @@ from django.test import TestCase
 from . models import Project
 import time
 from . models import Project
+from django.core.urlresolvers import reverse
 # Create your tests here.
+import os
+import django
+
+
+# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+FULLPATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 class ProjectPageTest(TestCase):
 
@@ -32,22 +39,23 @@ class ProjectPageTest(TestCase):
         self.assertTrue(other_project.extension == 'txt')
         self.assertTrue(other_project.source == 'avidalab/projects/static/test/test.txt')
 
-    #This test should beable to go to the download link for the file
-    def test_where_is_that_file(self):
-        #create a test project
-        test_project = Project(name='Test', extension='txt', source='avidalab/projects/static/test/test.txt')
+
+    def test_file_in_projec_uploading(self):
+        #Creating a file is a special case
+        #You must post to the page
+        response = self.client.post(
+            #reverse gets the right view
+            reverse('projects'),
+
+            #This is the JSON??? for the information needed by the upload funciton on the page
+            {
+                'source': os.path.join(FULLPATH, 'avidalab/projects/static/test/test.txt'),
+                'name': 'test',
+                'extension':'test'
+            },
+        )
+
+        #if we get a 200 code we passed the test!
+        self.assertEqual(response.status_code, 200, 'Error on create.')
 
 
-        #print(test_project)
-        #save it
-        test_project.save()
-
-        #Access the test project
-        other_project = Project.objects.get(name='Test')
-        print(other_project.source.url)
-
-        #go to the URL for the queryed projects file
-        response = self.client.get(other_project.source.url , follow=True)
-        #print(other_project.source.url)
-        self.assertEquals(response.status_code, 200)
-        #self.assertTrue(True)

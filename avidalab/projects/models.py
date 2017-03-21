@@ -1,8 +1,7 @@
 from django.db import models
 from django.core.files.storage import FileSystemStorage
 
-
-
+fs = FileSystemStorage(location='/avidalab/projects/open_projects')
 # Create your models here.
 class Project( models.Model):
 
@@ -13,5 +12,5 @@ class Project( models.Model):
     extension = models.CharField(max_length=10)
 
     #we would like the source
-    source = models.FileField(upload_to='open_projects')
+    source = models.FileField(upload_to='projects/%Y/%m/%d')
 

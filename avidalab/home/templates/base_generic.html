@@ -37,10 +37,10 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
     <div class="w3-bar-block">
         {% block sidebar %}
         <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
-        <a href="{% url 'index' %}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-eye fa-fw"></i>  Home</a>
+        <a href="{% url 'index' %}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-comment fa-fw"></i>  Home</a>
         <a href="{% url 'projects' %}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>  Projects</a>
         <a href="{% url 'analysis' %}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bullseye fa-fw"></i>  Analysis</a>
-        <a href="{% url 'contact' %}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-diamond fa-fw"></i>  Contact Us</a>
+        <a href="{% url 'contact' %}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>  Contact Us</a>
         {% endblock %}
     </div>
 </nav>
@@ -73,16 +73,16 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
         <div class="w3-right">
         </div>
         <div class="w3-clear"></div>
-        <h4><a href="{% url 'analysis' %}">Analysis</a></h4>
+        <h4><a href="{% url 'projects' %}">Projects</a></h4>
       </div>
     </div>
     <div class="w3-quarter">
       <div class="w3-container w3-teal w3-padding-16">
-        <div class="w3-left"><i class="fa fa-share-alt w3-xxxlarge"></i></div>
+        <div class="w3-left"><i class="fa fa-bullseye w3-xxxlarge"></i></div>
         <div class="w3-right">
         </div>
         <div class="w3-clear"></div>
-        <h4><a href="{% url 'projects' %}">Projects</a></h4>
+        <h4><a href="{% url 'analysis' %}">Analysis</a></h4>
       </div>
     </div>
     <div class="w3-quarter">

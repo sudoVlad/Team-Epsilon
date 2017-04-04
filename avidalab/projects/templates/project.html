@@ -12,7 +12,7 @@
         {% if projects %}
             <ul>
                 {% for project in projects %}
-                    <li><a href="{{ project.source.url }}"> {{ project.name }} </a></li>
+                    <li><a href="{{ project.source.url }}"> {{ project.name }} - {{project.decompressed }} </a></li>
                     <form action="{% url 'delete' %}" method="post" enctype="multipart/form-data">
 
                     {% csrf_token %}

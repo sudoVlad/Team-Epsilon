@@ -13,7 +13,7 @@ def list(request):
         form = ProjectForm(request.POST, request.FILES)
         if form.is_valid():
 
-            newdoc = Project(source=request.FILES['projectFile'], name=form['name'].value(), extension=form['extension'].value())
+            newdoc = Project(source=request.FILES['projectFile'], name=form['name'].value(), extension=form['extension'].value(), decompressed='COMPRESSED')
             newdoc.save()
             print(newdoc.name)
             print(newdoc.extension)

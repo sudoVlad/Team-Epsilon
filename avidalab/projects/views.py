@@ -2,22 +2,29 @@ from django.shortcuts import render
 
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
-from django.views.generic import UpdateView
+from django.core.urlresolvers import reverse_lazy
+from django.views.generic import UpdateView , DeleteView
 from django.shortcuts import get_object_or_404
 from . models import Project
 from . forms import ProjectForm
 
+
 class edit(UpdateView):
     model = Project
     fields = '__all__'
-    template_name_suffix = '_update_form'
-
-    def get_object(self):
-        print(self.request.GET.get('editthis'))
-        return Project.objects.get(pk=self.request.POST.get('editthis'))
+    template_name = "projectedit.html"
 
     def get_success_url(self):
-        return 'project/'
+        return reverse_lazy('projects')
+
+
+class delete(DeleteView):
+    model = Project
+    fields = '__all__'
+    template_name = "projectdel.html"
+
+    def get_success_url(self):
+        return reverse_lazy('projects')
 
 def list(request):
     # Handle file upload
@@ -44,22 +51,4 @@ def list(request):
         'project.html',
         {'projects': projects, 'form': form}
     )
-
-
-
-def delete(request):
-    #print('step 1')
-    #the first thing you do is you do a get with post
-    docId = request.POST.get('deletethis', None)
-    #print(docId)
-    #we then query the database for the object to delete
-    docToDel = get_object_or_404(Project, pk = docId)
-    #print(docToDel)
-    #We then call the delete function on the file
-    docToDel.source.delete()
-    #print('deleting')
-    #Then we call the delete function on the object in the database
-    docToDel.delete()
-
-    return HttpResponseRedirect(reverse('projects'))
 

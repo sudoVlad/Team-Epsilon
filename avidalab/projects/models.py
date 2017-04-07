@@ -1,5 +1,4 @@
 from django.db import models
-from django.core.files.storage import FileSystemStorage
 
 # Create your models here.
 class Project( models.Model):
@@ -9,6 +8,7 @@ class Project( models.Model):
 
     #we would like the extension
     extension = models.CharField(max_length=10)
+
 
     #we would like the source
     #the project source should be today's date and the name of the file

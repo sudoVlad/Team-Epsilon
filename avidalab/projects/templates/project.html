@@ -27,7 +27,7 @@
         {% endif %}
 
         <!-- Upload form. Note enctype attribute! -->
-        <form action="{% url 'projects' %}" method="post" enctype="multipart/form-data">
+        <form action="{% url "projects" %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <p>{{ form.non_field_errors }}</p>
 
@@ -42,31 +42,13 @@
               {{ form.name }}
               {{ form.name.errors }}
             </fieldset>
+            <fieldset>
+              extension:
+              {{ form.extension }}
+              {{ form.extension.errors }}
+            </fieldset>
 
-            <div id="mos">
-                <div id="mosblock" class="moseffect stitched">
-                    <aside>
-                        <div class="textwidget widget-text">
-                            <div id='chainselect_wrap' class='branch cs_count_1'>
-                                <select name="branch" id='chainlist_1'>
-                                    <option>Extension</option>
-                                    <option value='0'>.targz</option>
-                                    <option>.zip</option>
-                                    <option>.dat</option>
-                                    <option>.pdf</option>
-                                    <option>.docx</option>
-                                </select>
-                                <input type='hidden' id='chainselects_taxurl' value='' />
-                                <input type='hidden' id='chainselects_siteurl' value='something.com' />
-                                <input name="findbranch" type='button' id="brancher" value='Unzip' /> <span id='chainselects_loading'></span>
-
-                            </div>
-                        </div>
-                    </aside>
-                </div>
-
-                <p><input type="submit" value="Upload"/></p>
-            </div>
+            <p><input type="submit" value="Upload"/></p>
         </form>
     </body>
 {% endblock %}

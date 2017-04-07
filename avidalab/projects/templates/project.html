@@ -16,13 +16,17 @@
                     <form action="{% url 'delete' %}" method="post" enctype="multipart/form-data" style="float: left;">
 
 
-                    {% csrf_token %}
-                    <input type="hidden" name="deletethis" value={{ project.pk }} />
-                    <input type="submit" value="Delete" />
+                        {% csrf_token %}
+                        <input type="hidden" name="deletethis" value={{ project.pk }} />
+                        <input type="submit" value="Delete" />
 
                     </form>
-                    <form style="float: left;">
-                             <input type="submit" value="Edit"/>
+                    <form action="{% url 'edit' %}" method="post" enctype="multipart/form-data" style="float: left;">
+                        {% csrf_token %}
+
+                        <input type="hidden" name="editthis" value={{ project.pk }} />
+                        <input type="submit" value="Edit"/>
+
                     </form>
                     {% if project.extension != "none" %}
                         <form>
@@ -57,6 +61,7 @@
               {{ form.extension }}
               {{ form.extension.errors }}
             </fieldset>
+
 
             <p><input type="submit" value="Upload"/></p>
         </form>

@@ -2,10 +2,22 @@ from django.shortcuts import render
 
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
-
+from django.views.generic import UpdateView
+from django.shortcuts import get_object_or_404
 from . models import Project
 from . forms import ProjectForm
 
+class edit(UpdateView):
+    model = Project
+    fields = '__all__'
+    template_name_suffix = '_update_form'
+
+    def get_object(self):
+        print(self.request.GET.get('editthis'))
+        return Project.objects.get(pk=self.request.POST.get('editthis'))
+
+    def get_success_url(self):
+        return 'project/'
 
 def list(request):
     # Handle file upload
@@ -33,7 +45,7 @@ def list(request):
         {'projects': projects, 'form': form}
     )
 
-from django.shortcuts import get_object_or_404
+
 
 def delete(request):
     #print('step 1')
@@ -50,3 +62,4 @@ def delete(request):
     docToDel.delete()
 
     return HttpResponseRedirect(reverse('projects'))
+

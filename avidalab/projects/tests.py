@@ -91,5 +91,3 @@ class ProjectPageTest(TestCase):
         os.remove(testfile.name)
         file_path = project.source.path
         os.remove(file_path)
-
-

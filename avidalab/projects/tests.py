@@ -7,6 +7,7 @@ from django.core.urlresolvers import reverse
 import os
 import django
 from django.core.files.uploadedfile import SimpleUploadedFile
+from . forms import ProjectForm
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 FULLPATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -15,7 +16,6 @@ class ProjectPageTest(TestCase):
     def generate_file(self):
         try:
             myfile = open('test.csv', 'wb')
-
         finally:
             myfile.close()
 
@@ -79,9 +79,10 @@ class ProjectPageTest(TestCase):
         response = self.client.post(
             # reverse gets the right view
             '/projects/',
-            data=data
+            data=data,
+            follow=True
         )
-
+        response = self.client.get('/projects/')
         self.assertNotContains( response, 'No documents')
 
         project =  Project.objects.all()[0]
@@ -92,4 +93,13 @@ class ProjectPageTest(TestCase):
         file_path = project.source.path
         os.remove(file_path)
 
-
+    def test_valid_project_form(self):
+        uploadFile = self.generate_file()
+        f = open(uploadFile.name, 'rb')
+        title = {'name':'test'}
+        ext = {'extension': 'none'}
+        suf_test = {'projectFile':uploadFile.name}
+        comp = {'decompressed': 'COMPRESSED'}
+        test_form = ProjectForm(title, suf_test, ext)
+        print(test_form.is_valid())
+        self.assertTrue(test_form.is_valid())

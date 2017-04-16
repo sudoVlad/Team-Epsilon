@@ -1,5 +1,11 @@
 from django import forms
 from . models import Project
+from django.core.exceptions import ValidationError
+
+def validate_file_extension(value):
+    print('doing this thing here ***************')
+    if not value.name.endswith('.targz'):
+        raise ValidationError(u'Only Appropriate compressed files allowed')
 
 class ProjectForm(forms.Form):
     class Meta:
@@ -8,11 +14,9 @@ class ProjectForm(forms.Form):
 
     projectFile = forms.FileField(
         label='Select a file',
+        validators=[validate_file_extension]
     )
 
     name = forms.CharField(required=True)
-    extension = forms.ChoiceField(label=("With selected"), choices=(('none', '-----'),
-                                                   ('targz', ('targz')),
-                                                   ('none', ('none'))), required=True)
 
 

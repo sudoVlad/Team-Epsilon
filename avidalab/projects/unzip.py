@@ -6,7 +6,7 @@ import shutil
 class Media(models.Model):
     #...
     file = FileBrowseField("File", max_length=200, directory="shells/",  blank=True, 
-        null=True,help_text="Upload a video/image/swf, zipped slideshow, etc.")
+        null=True,help_text="tar.gz")
     #...
     
         

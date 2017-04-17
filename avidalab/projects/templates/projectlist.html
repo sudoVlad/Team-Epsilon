@@ -1,0 +1,46 @@
+{% extends "base_generic.html" %}
+<!-- Add additional CSS in static file -->
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/styles.css' %}"> {% block content %}
+<head>
+    <meta charset="utf-8">
+    <title>Projects</title>
+</head>
+
+<body>
+    <!-- List of uploaded documents -->
+
+    <ul>
+        {% for project in object_list %}
+            <li><a href="{{ project.source.url }}"> {{ project.name }} - {{project.decompressed }} </a></li>
+            <form action="{% url 'delete'  pk=project.pk%}" enctype="multipart/form-data" style="float: left;">
+
+
+                {% csrf_token %}
+                <input type="submit" value="Delete" />
+
+            </form>
+
+            <form action="{% url 'edit' pk=project.pk %}"  enctype="multipart/form-data" style="float: left;">
+                {% csrf_token %}
+
+                <input type="hidden" name="pk" value={{ project.pk }} />
+                <input type="submit" value="Edit"/>
+
+            </form>
+            <form>
+                 <input type="submit" value="Unzip"/>
+            </form>
+
+        {% empty %}
+            <li>No Projects yet.</li>
+        {% endfor %}
+    </ul>
+    <br>
+    <br>
+    <form action="{% url 'create' %}"  enctype="multipart/form-data" style="float: left;">
+         <input type="submit" value="Create a New Project"/>
+    </form>
+
+</body>
+{% endblock %}

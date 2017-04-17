@@ -12,13 +12,25 @@
         {% if projects %}
             <ul>
                 {% for project in projects %}
-                    <li><a href="{{ project.source.url }}"> {{ project.name }} </a></li>
-                    <form action="{% url 'delete' %}" method="post" enctype="multipart/form-data">
+                    <li><a href="{{ project.source.url }}"> {{ project.name }} - {{project.decompressed }} </a></li>
+                    <form action="{% url 'delete'  pk=project.pk%}" enctype="multipart/form-data" style="float: left;">
 
-                    {% csrf_token %}
-                    <input type="hidden" name="deletethis" value={{ project.pk }} />
-                    <input type="submit" value="Delete" />
-                </form>
+
+                        {% csrf_token %}
+                        <input type="submit" value="Delete" />
+
+                    </form>
+
+                    <form action="{% url 'edit' pk=project.pk %}"  enctype="multipart/form-data" style="float: left;">
+                        {% csrf_token %}
+
+                        <input type="hidden" name="pk" value={{ project.pk }} />
+                        <input type="submit" value="Edit"/>
+
+                    </form>
+                    <form>
+                         <input type="submit" value="Unzip"/>
+                    </form>
 
                 {% endfor %}
             </ul>
@@ -27,7 +39,7 @@
         {% endif %}
 
         <!-- Upload form. Note enctype attribute! -->
-        <form action="{% url "projects" %}" method="post" enctype="multipart/form-data">
+        <form action="{% url 'projects' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <p>{{ form.non_field_errors }}</p>
 
@@ -42,11 +54,7 @@
               {{ form.name }}
               {{ form.name.errors }}
             </fieldset>
-            <fieldset>
-              extension:
-              {{ form.extension }}
-              {{ form.extension.errors }}
-            </fieldset>
+
 
             <p><input type="submit" value="Upload"/></p>
         </form>

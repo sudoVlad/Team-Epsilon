@@ -18,7 +18,7 @@ class Media(models.Model):
         We'll use this to unzip .zip files in place when/if they're uploaded.
         """
 
-        if kwargs['file'].extension == ".zip":
+        if kwargs['file'].extension == ".tar.gz":
             # Note: this doesn't test for corrupt zip files. 
             # If encountered, user will get an HTTP Error 
             # and file will remain on the server.

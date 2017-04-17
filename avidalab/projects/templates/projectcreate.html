@@ -1,0 +1,28 @@
+{% extends "base_generic.html" %}
+<!-- Add additional CSS in static file -->
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/styles.css' %}"> {% block content %}
+<head>
+    <meta charset="utf-8">
+    <title>Projects</title>
+</head>
+
+<body>
+    <!-- List of uploaded documents -->
+
+    <ul>
+
+        <form action="" method='post'>
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <input type="submit" value="Save" />
+        </form>
+
+        <a href="{% url "projects" %}">back to list</a>
+    </ul>
+
+
+</body>
+{% endblock %}

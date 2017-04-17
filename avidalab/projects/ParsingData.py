@@ -1,8 +1,9 @@
 import re
-
+import os
 #Function for parsing the file for the column names
 #Passing file name as argument
 def parseFile(file):
+    file = os.path.abspath(file)
     #Opening file
     with open(file, 'r') as f:
         #Array for name of Columns

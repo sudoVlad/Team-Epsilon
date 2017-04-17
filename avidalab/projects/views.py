@@ -29,13 +29,13 @@ class delete(DeleteView):
 def list(request):
     # Handle file upload
     if request.method == 'POST':
+        print(request.POST)
+        print(request.FILES)
         form = ProjectForm(request.POST, request.FILES)
         if form.is_valid():
 
-            newdoc = Project(source=request.FILES['projectFile'], name=form['name'].value(), extension=form['extension'].value(), decompressed='COMPRESSED')
+            newdoc = Project(source=request.FILES['projectFile'], name=form['name'].value(), decompressed='COMPRESSED')
             newdoc.save()
-            print(newdoc.name)
-            print(newdoc.extension)
             # Redirect to the document list after POST
             return HttpResponseRedirect(reverse('projects'))
     else:

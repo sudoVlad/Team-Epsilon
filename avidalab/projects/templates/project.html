@@ -28,11 +28,9 @@
                         <input type="submit" value="Edit"/>
 
                     </form>
-                    {% if project.extension != "none" %}
-                        <form>
-                             <input type="submit" value="Unzip"/>
-                        </form>
-                    {% endif %}
+                    <form>
+                         <input type="submit" value="Unzip"/>
+                    </form>
 
                 {% endfor %}
             </ul>
@@ -55,11 +53,6 @@
               name:
               {{ form.name }}
               {{ form.name.errors }}
-            </fieldset>
-            <fieldset>
-              extension:
-              {{ form.extension }}
-              {{ form.extension.errors }}
             </fieldset>
 
 

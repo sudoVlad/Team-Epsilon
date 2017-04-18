@@ -22,6 +22,6 @@ def parseFile(file):
                 columnName = columnName.strip()
                 #Adding columns to the array
                 colNames.append(columnName)
-        f.close();
+        f.close()
         #Returns array of column names
         return colNames

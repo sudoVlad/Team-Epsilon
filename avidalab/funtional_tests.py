@@ -17,6 +17,8 @@ class HomePageTest(TestCase):
         self.assertEquals(response.status_code, 200)
 
 
+
+
 class ContactPageTestCase(TestCase):
 
 
@@ -25,6 +27,17 @@ class ContactPageTestCase(TestCase):
         #print(found.redirect_chain)
         self.assertEqual(found.status_code, 200)
 
+        #now lets try that with some post data
+        data = {'name':'test',
+                'phone' : '3333333333',
+                'email' : 'something@gmail.com',
+                'subject': 'test subject',
+                'message' : 'test',
+                }
+
+        found = self.client.post('/contact/', data , follow=True)
+        # print(found.redirect_chain)
+        self.assertEqual(found.status_code, 200)
 
 class AnalysisPageTestCase(TestCase):
 

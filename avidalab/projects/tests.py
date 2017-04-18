@@ -21,6 +21,13 @@ class ProjectPageTest(TestCase):
     def setUp(self):
         Project.objects.create(name='Test',source='avidalab/projects/static/test/test.targz' )
 
+    def test_that_project_model(self):
+        test_project = Project.objects.create(name='Test2',source='avidalab/projects/static/test/test.targz' )
+        test_project.save()
+        self.assertTrue(isinstance(test_project, Project))
+
+
+
     #this test makes sure the model is working as intended
     def test_Model(self):
         #test creation of a project

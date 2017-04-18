@@ -1,0 +1,15 @@
+{% extends "base_generic.html" %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <head>
+        <meta charset="utf-8">
+        <title>Analyze</title>
+    </head>
+
+    <ul>
+        {{ object.name}}
+    </ul>
+
+
+{% endblock %}

@@ -79,7 +79,7 @@ class ProjectPageTest(TestCase):
 
     def test_project_delete_redirect(self):
         # make a test project
-        test_project = Project(name='Delete', source='avidalab/projects/static/test/test.targz')
+        test_project = Project(name='Delete', source='avidalab/projects/testdata/test.targz')
         # save it
         test_project.save()
 
@@ -112,3 +112,22 @@ class ProjectPageTest(TestCase):
         columnNames = ParsingData.parseFile('projects/testdata/dominant.dat')
         dominantColNames = ["Update", "Average Merit of the Dominant Genotype", "Average Gestation Time of the Dominant Genotype", "Average Fitness of the Dominant Genotype", "Repro Rate?", "Size of Dominant Genotype", "Copied Size of Dominant Genotype", "Executed Size of Dominant Genotype", "Abundance of Dominant Genotype", "Number of Births", "Number of Dominant Breed True?", "Dominant Gene Depth", "Dominant Breed In", "Max Fitness?", "Genotype ID of Dominant Genotype", "Name of the Dominant Genotype"]
         self.assertEquals(columnNames, dominantColNames)
+
+    def test_list_posting_data(self):
+
+        test_file = open(os.path.abspath('projects/testdata/test.targz'))
+        test_data = {
+                    'name':'postTest',
+                    'projectFile': test_file
+                    }
+        response = self.client.post(reverse('projects'),  data=test_data)
+        self.assertEquals(response.status_code, 302)
+
+    def test_list_posting_data_validation(self):
+        test_file = open(os.path.abspath('projects/testdata/dominant.dat'))
+        test_data = {
+            'name': 'postTest',
+            'projectFile': test_file
+        }
+        response = self.client.post(reverse('projects'), data=test_data)
+        self.assertEquals(response.status_code, 200)

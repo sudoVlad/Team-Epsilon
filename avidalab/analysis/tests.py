@@ -1,7 +1,6 @@
 from django.test import TestCase
 from django.core.urlresolvers import resolve
 from django.http import HttpRequest
-from . views import index
 from . pystats import *
 # Create your tests here.
 class analysisTestCase(TestCase):

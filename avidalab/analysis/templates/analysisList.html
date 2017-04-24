@@ -11,20 +11,16 @@
     <!-- List of uploaded documents -->
 
     <ul>
+        Select a project to analyze:
          {% for project in object_list %}
-            {{ project.name }}
-            <form action="{% url 'analyze' pk=project.pk %}"  enctype="multipart/form-data">
+            <form action="{% url 'analyze' pk=project.pk %}" name = "select" enctype="multipart/form-data">
                      {% csrf_token %}
-                     <input type="submit" value="Analyze"/>
-
-            </form>
+                     <input type="radio" name="chooseone" onclick="document.select.action ='{% url 'analyze' pk=project.pk %}'"> {{ project.name }}  <br>
         {% empty %}
                 <li>No Decompressed Projects yet.</li>
             {% endfor %}
-
+                <input type="submit" value="Analyze"/>
+            </form>
     </ul>
-
-
-
 </body>
 {% endblock %}

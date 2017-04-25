@@ -1,7 +1,7 @@
 {% extends "base_generic.html" %}
 {% block content %}
 {% load static %}
-<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+<link rel="stylesheet" href="{% static 'css/styles.css' %}" xmlns="http://www.w3.org/1999/html">
     <head>
         <meta charset="utf-8">
         <title>Analyze</title>
@@ -9,6 +9,16 @@
 
     <ul>
         {{ object.name}}
+        {{ runs }} </br>
+
+        {% for run in runs %}
+            {{run}}</br>
+        {% endfor %}
+
+        {{ data_files }}</br>
+        {% for data_file in data_files %}
+            {{data_file}}</br>
+        {% endfor %}
         <form method="get" action="/analysis">
             <button type="submit">Back</button>
         </form>

@@ -31,6 +31,7 @@ class listProjects(ListView):
     fields = '__all__'
     template_name = 'projectlist.html'
 
+'''
 class createProjects(CreateView):
     #form_class = ProjectForm
     model = Project
@@ -39,7 +40,7 @@ class createProjects(CreateView):
 
     def get_success_url(self):
         return reverse_lazy('projects')
-
+'''
 
 def list(request):
     # Handle file upload

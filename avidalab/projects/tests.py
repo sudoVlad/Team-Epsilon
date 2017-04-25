@@ -121,7 +121,7 @@ class ProjectPageTest(TestCase):
                     'projectFile': test_file
                     }
         response = self.client.post(reverse('projects'),  data=test_data)
-        self.assertEquals(response.status_code, 302)
+        self.assertEquals(response.status_code, 200)
 
     def test_list_posting_data_validation(self):
         test_file = open(os.path.abspath('projects/testdata/dominant.dat'))

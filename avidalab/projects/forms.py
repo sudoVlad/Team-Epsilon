@@ -3,8 +3,8 @@ from . models import Project
 from django.core.exceptions import ValidationError
 
 def validate_file_extension(value):
-    print('doing this thing here ***************')
-    if not value.name.endswith('.targz'):
+
+    if not value.name.endswith('.tar.gz'):
         raise ValidationError(u'Only Appropriate compressed files allowed')
 
 class ProjectForm(forms.Form):

@@ -42,6 +42,7 @@ htmlcov
 
 # Pycharm
 .idea/*
+.pyc
 
 
 # Vim

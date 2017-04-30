@@ -1,0 +1,26 @@
+{% extends "base_generic.html" %}
+<!-- Add additional CSS in static file -->
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/styles.css' %}"> {% block content %}
+<head>
+    <meta charset="utf-8">
+    <title>Analytics</title>
+</head>
+
+<body>
+    <!-- List of uploaded documents -->
+
+    <ul>
+        Select a project to analyze:
+         {% for project in object_list %}
+            <form action="{% url 'analyze' pk=project.pk %}" name = "select" enctype="multipart/form-data">
+                     {% csrf_token %}
+                     <input type="radio" name="chooseone" onclick="document.select.action ='{% url 'analyze' pk=project.pk %}'"> {{ project.name }}  <br>
+        {% empty %}
+                <li>No Decompressed Projects yet.</li>
+            {% endfor %}
+                <input type="submit" value="Analyze"/>
+            </form>
+    </ul>
+</body>
+{% endblock %}

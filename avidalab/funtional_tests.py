@@ -72,5 +72,7 @@ class AdminTest(TestCase):
         # print(response)
         #self.assertEquals(response.status_code, 404)
 
+
+
 if __name__ == '__main__':
     unittest.main(warnings='ignore')

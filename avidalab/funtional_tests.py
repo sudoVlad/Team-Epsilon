@@ -60,6 +60,17 @@ class ProjectsPageTestCase(TestCase):
         # print(response)
         #self.assertEquals(response.status_code, 404)
 
+class AdminTest(TestCase):
+
+    def test_urls_go_to_the_right_place(self):
+        # test if /projects/ goes to the project page
+        response = self.client.get('/admin/', follow=True)
+        # print(response)
+        self.assertEquals(response.status_code, 200)
+
+
+        # print(response)
+        #self.assertEquals(response.status_code, 404)
 
 if __name__ == '__main__':
     unittest.main(warnings='ignore')

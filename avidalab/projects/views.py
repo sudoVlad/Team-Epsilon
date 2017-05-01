@@ -42,6 +42,17 @@ class createProjects(CreateView):
         return reverse_lazy('projects')
 '''
 
+def unzip(request, pk):
+
+    #we should be passed the project ID as data from the form ont he previous page
+
+    #we should call the unzip function on the source of the project grabbed from the ID
+
+    #we should then update the decompressed field on the project to be the directory of the unzipped files
+
+
+    return HttpResponseRedirect(reverse('projects'))
+
 def list(request):
     # Handle file upload
     if request.method == 'POST':

@@ -28,9 +28,14 @@
                         <input type="submit" value="Edit"/>
 
                     </form>
-                    <form>
-                         <input type="submit" value="Unzip"/>
-                    </form>
+                    {% if project.decompressed == "COMPRESSED" %}
+                        <form action="{% url 'unzip' pk=project.pk %}"  enctype="multipart/form-data" style="float: left;">
+                            {% csrf_token %}
+                             <input type="submit" value="Unzip"/>
+                        </form>
+                    {% endif %}
+                </br>
+                </br>
 
                 {% endfor %}
             </ul>

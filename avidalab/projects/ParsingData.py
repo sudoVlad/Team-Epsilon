@@ -1,9 +1,8 @@
 import re
-import os
+
 #Function for parsing the file for the column names
 #Passing file name as argument
 def parseFile(file):
-    file = os.path.abspath(file)
     #Opening file
     with open(file, 'r') as f:
         #Array for name of Columns
@@ -25,3 +24,41 @@ def parseFile(file):
         f.close()
         #Returns array of column names
         return colNames
+
+#Function for parsing the file for the actual data that will be returned as a dictionary
+#Passing file name as argument
+def mapData(file):
+    #Array of column names
+    columns = parseFile(file)
+
+    #Initial dictionary of column names(keys) set to empty lists(values)
+    dictOfData = {key: [] for key in columns}
+
+    #Initialize array with all the keys
+    keys = []
+    for key in dictOfData:
+        keys.append(key)
+
+    #Opening file
+    with open(file, 'r') as f:
+        for line in f:
+            #Regex matching to find column 1 - X
+            match = re.search(r'^#\s*[0-9]*:', line)
+            #Using the regex to
+            #Skip the comments to parse the data columns
+            if not match:
+                #Taking a line of data and breaking it into a list
+                #where each index of the list refers to each data column
+                data = line.split(" ")
+                #initialized i to 0 to access the keys
+                i = 0
+                #Parse through the list of data and put data at each index into
+                #the dictionary for each key
+                for column in data:
+                    #Strip the newline carriage because the last column will have one
+                    column = column.strip('\n')
+                    dictOfData[keys[i]].append(column)
+                    i += 1
+        f.close()
+        #Return dictionary of the keys(name of each column) mapped to its values(list of data for each column)
+        return dictOfData

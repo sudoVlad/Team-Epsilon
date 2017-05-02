@@ -7,7 +7,7 @@ from django.views.generic import UpdateView , DeleteView, ListView, CreateView
 from django.shortcuts import get_object_or_404
 from . models import Project
 from . forms import ProjectForm
-
+from . unzip import unzip_project
 
 class edit(UpdateView):
     model = Project
@@ -43,9 +43,9 @@ class createProjects(CreateView):
 '''
 
 def unzip(request, pk):
-
+    print('in the view')
     #we should be passed the project ID as data from the form ont he previous page
-
+    unzip_project(Project.objects.get(id=pk))
     #we should call the unzip function on the source of the project grabbed from the ID
 
     #we should then update the decompressed field on the project to be the directory of the unzipped files

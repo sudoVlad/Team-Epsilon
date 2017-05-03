@@ -29,6 +29,14 @@ class Project( models.Model):
     def delete(self, *args, **kwargs):
         self.source.delete()
         super(Project, self).delete(*args, **kwargs)
+    '''
+    def save(self, *args, **kwargs):
+        if not self.pk:
+        # This code only happens if the objects is
+        # not in the database yet. Otherwise it would
+        # have pk
+        super(MyModel, self).save(*args, **kwargs)
+    '''
 
 
 

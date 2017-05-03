@@ -23,3 +23,7 @@ for item in os.listdir(dir_name): # loop through items in dir
         outF = file(file_name2, 'wb')
         outF.write(s)
         outF.close()
+
+
+def unzip_project(request, pk):
+    return

@@ -11,6 +11,7 @@ from django.db import models
 from django.core.files.uploadedfile import SimpleUploadedFile
 from . forms import ProjectForm
 from . import ParsingData
+from . ParsingData import mapData
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -106,7 +107,11 @@ class ProjectPageTest(TestCase):
         self.assertEquals(response.status_code, 200)
 
 
+    def test_project_unzip_reirect(self):
+        test_project = Project.objects.get(name='Test')
 
+        response = self.client.post(reverse('unzip', args=(test_project.id,)), follow=True)
+        self.assertEquals(response.status_code, 200)
 
 
     def test_parsing_data_function(self):
@@ -115,10 +120,14 @@ class ProjectPageTest(TestCase):
         self.assertEquals(columnNames, dominantColNames)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     def test_parsing_data_function_for_dictionary(self):
         dictionary = mapData('dominant.dat')
         self.assertTrue(dictionary)
 =======
+=======
+
+>>>>>>> 29588afc6ef1d1ac07a329dd1a9dd6294af6f78d
     def test_list_posting_data(self):
 
         test_file = open(os.path.abspath('projects/testdata/test.targz'))
@@ -137,4 +146,12 @@ class ProjectPageTest(TestCase):
         }
         response = self.client.post(reverse('projects'), data=test_data)
         self.assertEquals(response.status_code, 200)
+<<<<<<< HEAD
 >>>>>>> master
+=======
+
+    def test_parsing_data_function_for_dictionary(self):
+        dictionary = mapData('projects/testdata/dominant.dat')
+        self.assertTrue(dictionary)
+
+>>>>>>> 29588afc6ef1d1ac07a329dd1a9dd6294af6f78d

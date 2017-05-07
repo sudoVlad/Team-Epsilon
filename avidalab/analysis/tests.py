@@ -2,6 +2,11 @@ from django.test import TestCase
 from django.core.urlresolvers import resolve
 from django.http import HttpRequest
 from . pystats import *
+from django.core.urlresolvers import reverse
+import os
+
+
+from projects.models import Project
 # Create your tests here.
 class analysisTestCase(TestCase):
 
@@ -48,3 +53,13 @@ class analysisTestCase(TestCase):
         # x = [1,3,5,7,9]
         # y = [2,4,6,8,10]
         # self.assertEqual(mannWhitneyU(x, y), (10.0, 0.33805165701157347))
+
+    def test_context_data_from_view(self):
+
+        #first we must setup the test project
+        test_project = Project(name='TestThis',source='avidalab/projects/static/test/test.targz', decompressed=os.path.abspath('projects/testdata/testProject' ))
+        print(test_project.decompressed)
+        test_project.save()
+        test_project = Project.objects.get(name='TestThis')
+        response = self.client.get(reverse('analyze', args=(test_project.id,)), follow=True)
+        self.assertEqual(response.status_code, 200)

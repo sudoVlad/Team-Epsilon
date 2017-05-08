@@ -25,5 +25,5 @@ for item in os.listdir(dir_name): # loop through items in dir
         outF.close()
 
 
-def unzip_project(request, pk):
+def unzip_project(id):
     return

@@ -119,15 +119,11 @@ class ProjectPageTest(TestCase):
         dominantColNames = ["Update", "Average Merit of the Dominant Genotype", "Average Gestation Time of the Dominant Genotype", "Average Fitness of the Dominant Genotype", "Repro Rate?", "Size of Dominant Genotype", "Copied Size of Dominant Genotype", "Executed Size of Dominant Genotype", "Abundance of Dominant Genotype", "Number of Births", "Number of Dominant Breed True?", "Dominant Gene Depth", "Dominant Breed In", "Max Fitness?", "Genotype ID of Dominant Genotype", "Name of the Dominant Genotype"]
         self.assertEquals(columnNames, dominantColNames)
 
-<<<<<<< HEAD
-<<<<<<< HEAD
     def test_parsing_data_function_for_dictionary(self):
         dictionary = mapData('dominant.dat')
         self.assertTrue(dictionary)
-=======
-=======
 
->>>>>>> 29588afc6ef1d1ac07a329dd1a9dd6294af6f78d
+
     def test_list_posting_data(self):
 
         test_file = open(os.path.abspath('projects/testdata/test.targz'))
@@ -146,12 +142,4 @@ class ProjectPageTest(TestCase):
         }
         response = self.client.post(reverse('projects'), data=test_data)
         self.assertEquals(response.status_code, 200)
-<<<<<<< HEAD
->>>>>>> master
-=======
 
-    def test_parsing_data_function_for_dictionary(self):
-        dictionary = mapData('projects/testdata/dominant.dat')
-        self.assertTrue(dictionary)
-
->>>>>>> 29588afc6ef1d1ac07a329dd1a9dd6294af6f78d

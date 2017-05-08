@@ -23,10 +23,6 @@ def parseFile(file):
                 colNames.append(columnName)
         f.close()
         #Returns array of column names
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 29588afc6ef1d1ac07a329dd1a9dd6294af6f78d
         return colNames
 
 #Function for parsing the file for the actual data that will be returned as a dictionary
@@ -66,9 +62,4 @@ def mapData(file):
         f.close()
         #Return dictionary of the keys(name of each column) mapped to its values(list of data for each column)
         return dictOfData
-<<<<<<< HEAD
-=======
-        return colNames
->>>>>>> master
-=======
->>>>>>> 29588afc6ef1d1ac07a329dd1a9dd6294af6f78d
+

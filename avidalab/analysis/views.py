@@ -5,9 +5,10 @@ from os import listdir
 from os import walk
 from django.views.generic import UpdateView , DeleteView, ListView, CreateView, DetailView
 from projects.models import Project
-
-
-
+from projects.ParsingData import parseFile, mapData
+from django.http import HttpResponseRedirect
+from django.core.urlresolvers import reverse
+import json
 # Create your views here.
 #def index(request):
 #    template = loader.get_template('analysis/analysis_index.html')
@@ -69,7 +70,8 @@ def analysisRunDetail(request):
         for name in files:
             path.join(name)
             if (name.endswith('.dat')):
-                dataFiles.append(name)
+                if name not in dataFiles:
+                    dataFiles.append(name)
 
     return render(request,
                   'analysisRunDetail.html',
@@ -81,24 +83,64 @@ def analysisRunDetail(request):
                   )
 
 def analysisFieldDetail(request):
+
     #get the hidden data
     exp = request.GET.get('exp')
     projectID = request.GET.get('projectID')
 
     runs = request.GET.getlist('selectedRuns')
+    if not runs:
+        return HttpResponseRedirect(reverse('analysis'))
+    data = request.GET.get('selectedData')
+    ##got to generate the list of fields to pick from
+    fields = parseFile(Project.objects.get(id=projectID).decompressed + '//' + exp + '//' + runs[0] + '//' + data)
 
     print(runs)
-    data = request.GET.get('selectedData')
+
 
     return render(request,
                   'analysisFieldDetail.html',
                   {'exp':exp,
                    'projectID':projectID,
                    'runs':runs,
-                   'data':data
+                   'data':data,
+                   'fields':fields
                    }
                   )
 
+def analysisGraphs(request):
+
+    ##lets go ahead and start getting dictionaries from each for the runs
+    runs = request.GET.getlist('newRuns')
+    field = request.GET.get('selectedField')
+    exp = request.GET.get('exp')
+    data = request.GET.get('data')
+    projectID = request.GET.get('projectID')
+    project = Project.objects.get(id=projectID)
+    path = project.decompressed
+
+    all_the_dictionaries = []
+    print(runs)
+    for run in runs:
+        #start by getting the full path to the file
+        full_path = path + '//' + exp + '//' + run + '//' + data
+        print(run)
+        #then we get map data from the function
+        all_the_dictionaries.append(mapData(full_path))
+
+
+    ##Get an array of graph images!
+    graphs = []
+
+
+
+    return render(request,
+                  'analysisGraphs.html',
+                  {'test':'test',
+                   'dictionarys':all_the_dictionaries,
+                   'graphs':graphs
+                   }
+                  )
 
 class analysisExpDetail(DetailView):
     model = Project

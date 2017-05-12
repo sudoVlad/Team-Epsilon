@@ -9,10 +9,29 @@
 
 <body>
     We made it here yay!
-    {{exp}} </br>
-    {{projectID}} </br>
-    {{runs}} </br>
-    {{data}} </br>
+
+
+     <form action="{% url 'graphs' %}" method="get"  enctype="multipart/form-data">
+            <select name="newRuns" multiple type="hidden">
+                {%for run in runs %}
+                    <option value={{run}}  name={{run}} selected="selected">{{run}}</option>
+                {% endfor %}
+            </select>
+
+            </br>
+            <select name="selectedField" single>
+                {%for field in fields %}
+                    <option value={{field}} name={{field}} >{{field}}</option>
+                {% endfor %}
+            </select>
+        <input type="hidden" name="exp" value={{exp}}>
+        <input type="hidden" name="projectID" value={{projectID}}>
+
+         <input type="hidden" name="data" value={{data}}>
+        <button type = "submit">Graphs</button>
+    </form>
+
+
 
 </body>
 {% endblock %}

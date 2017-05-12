@@ -142,6 +142,40 @@ def analysisGraphs(request):
                    }
                   )
 
+def analysisStats(request):
+
+    ##lets go ahead and start getting dictionaries from each for the runs
+    runs = request.GET.getlist('newRuns')
+    field = request.GET.get('selectedField')
+    exp = request.GET.get('exp')
+    data = request.GET.get('data')
+    projectID = request.GET.get('projectID')
+    project = Project.objects.get(id=projectID)
+    path = project.decompressed
+
+    all_the_dictionaries = []
+    print(runs)
+    for run in runs:
+        #start by getting the full path to the file
+        full_path = path + '//' + exp + '//' + run + '//' + data
+        print(run)
+        #then we get map data from the function
+        all_the_dictionaries.append(mapData(full_path))
+
+
+    ##Get an array of stats values!
+    stats = []
+
+
+
+    return render(request,
+                  'analysisStats.html',
+                  {'test':'test',
+                   'dictionarys':all_the_dictionaries,
+                   'stats':stats
+                   }
+                  )
+
 class analysisExpDetail(DetailView):
     model = Project
     template_name = 'analysisExpDetail.html'

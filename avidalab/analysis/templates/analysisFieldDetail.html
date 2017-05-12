@@ -30,7 +30,28 @@
          <input type="hidden" name="data" value={{data}}>
         <button type = "submit">Graphs</button>
     </form>
+    </br>
+    </br>
+    </br>
+    <form action="{% url 'stats' %}" method="get"  enctype="multipart/form-data">
+            <select name="newRuns" multiple type="hidden">
+                {%for run in runs %}
+                    <option value={{run}}  name={{run}} selected="selected">{{run}}</option>
+                {% endfor %}
+            </select>
 
+            </br>
+            <select name="selectedField" single>
+                {%for field in fields %}
+                    <option value={{field}} name={{field}} >{{field}}</option>
+                {% endfor %}
+            </select>
+        <input type="hidden" name="exp" value={{exp}}>
+        <input type="hidden" name="projectID" value={{projectID}}>
+
+         <input type="hidden" name="data" value={{data}}>
+        <button type = "submit">stats</button>
+    </form>
 
 
 </body>

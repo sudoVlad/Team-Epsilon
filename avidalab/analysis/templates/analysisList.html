@@ -13,9 +13,11 @@
     <ul>
         Select a project to analyze:
          {% for project in object_list %}
+            {% if project.decompressed != "COMPRESSED" %}
             <form action="{% url 'analyze' pk=project.pk %}" name = "select" enctype="multipart/form-data">
                      {% csrf_token %}
                      <input type="radio" name="chooseone" onclick="document.select.action ='{% url 'analyze' pk=project.pk %}'"> {{ project.name }}  <br>
+                {% endif %}
         {% empty %}
                 <li>No Decompressed Projects yet.</li>
             {% endfor %}

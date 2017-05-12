@@ -102,12 +102,14 @@ def graphBoxAndWhisker(dictionary):
     #Displaying the graph
     plot.show()
 
-#This is the dictionary of data we get from calling the mapData function from
-#our ParsingData.py file
-dictionaryOfData = mapData("dominant.dat")
+def TestToShow():
 
-#Calling the functions to display the various graphs
-graphScatter(dictionaryOfData)
-graphHistogram(dictionaryOfData)
-graphLineGraph(dictionaryOfData)
-graphBoxAndWhisker(dictionaryOfData)
+    #This is the dictionary of data we get from calling the mapData function from
+    #our ParsingData.py file
+    dictionaryOfData = mapData("dominant.dat")
+
+    #Calling the functions to display the various graphs
+    graphScatter(dictionaryOfData)
+    graphHistogram(dictionaryOfData)
+    graphLineGraph(dictionaryOfData)
+    graphBoxAndWhisker(dictionaryOfData)

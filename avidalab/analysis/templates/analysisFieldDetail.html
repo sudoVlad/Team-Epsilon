@@ -1,0 +1,18 @@
+{% extends "base_generic.html" %}
+<!-- Add additional CSS in static file -->
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/styles.css' %}"> {% block content %}
+<head>
+    <meta charset="utf-8">
+    <title>Analytics</title>
+</head>
+
+<body>
+    We made it here yay!
+    {{exp}} </br>
+    {{projectID}} </br>
+    {{runs}} </br>
+    {{data}} </br>
+
+</body>
+{% endblock %}

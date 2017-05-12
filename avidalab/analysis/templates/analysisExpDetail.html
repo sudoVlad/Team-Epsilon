@@ -1,0 +1,32 @@
+{% extends "base_generic.html" %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/styles.css' %}" xmlns="http://www.w3.org/1999/html">
+    <head>
+        <meta charset="utf-8">
+        <title>Analyze</title>
+    </head>
+
+    <br>
+        {{ object.name}} </br>
+
+        Select which exp to examine: </br>
+    <form action="{% url 'analyzeRun' %}" method="get"  enctype="multipart/form-data">
+        {% for exp in exps %}
+            <input name='exp' value={{exp}} type="radio">{{exp}}</br>
+        {% endfor %}
+        <input type="hidden" name="projectID" value={{object.pk}}>
+        <button type = "submit">Next</button>
+    </form>
+
+
+
+        <form method="get" action="/analysis">
+            <button type="submit">Back</button>
+        </form>
+
+    </ul>
+
+
+
+{% endblock %}

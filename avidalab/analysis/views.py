@@ -43,7 +43,7 @@ class analysisList(ListView):
     model = Project
     template_name = 'analysisList.html'
     fields ='__all__'
-
+'''
 class analysisDetail(DetailView):
     model = Project
     template_name = 'analysisDetail.html'
@@ -73,7 +73,7 @@ class analysisDetail(DetailView):
 
         #Look at analysisDetail.html to see how to access the items in the list
         return context
-
+'''
 
 def analysisRunDetail(request):
     #now we need some data to pass yay

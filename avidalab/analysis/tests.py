@@ -5,7 +5,7 @@ from . pystats import *
 from . views import mean_array_maker
 from django.core.urlresolvers import reverse
 import os
-
+from os import listdir
 
 from projects.models import Project
 # Create your tests here.
@@ -87,3 +87,80 @@ class analysisTestCase(TestCase):
         expected = [1, 2, 3, 4]
         self.assertListEqual(mean_array_maker(arrays).tolist(), expected)
 
+    def test_analysis_redirect(self):
+        response = self.client.get(reverse('analysis'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_analysis_detail_redirect(self):
+        #make sure the test project is proper
+        Project.objects.create(name='Test', source='avidalab/projects/static/test/test.targz',
+                               decompressed=os.path.abspath('projects/testdata/testProject'))
+        tp = Project.objects.get(name='Test')
+        response = self.client.get(reverse('analyze', args=[tp.id]))
+        self.assertEqual(response.status_code, 200)
+        runs = listdir(tp.decompressed)
+        self.assertListEqual(response.context_data['exps'], runs)
+
+    def test_analysis_runs_redirect(self):
+        #make sure the test project is proper
+        Project.objects.create(name='Test', source='avidalab/projects/static/test/test.targz',
+                               decompressed=os.path.abspath('projects/testdata/testProject'))
+        tp = Project.objects.get(name='Test')
+        data = {'exp': 'exp1',
+                'projectID':tp.id
+                }
+        response = self.client.get(reverse('analyzeRun'), data=data)
+        self.assertEqual(response.status_code, 200)
+
+    def test_analysis_field_redirect_no_runs(self):
+        #make sure the test project is proper
+        Project.objects.create(name='Test', source='avidalab/projects/static/test/test.targz',
+                               decompressed=os.path.abspath('projects/testdata/testProject'))
+        tp = Project.objects.get(name='Test')
+        data = {'exp':'exp1',
+                'projectID' : tp.id ,
+                }
+        response = self.client.get(reverse('analysisField'), data=data)
+        self.assertEqual(response.status_code, 302)
+
+    def test_analysis_field_redirect(self):
+        #make sure the test project is proper
+        Project.objects.create(name='Test', source='avidalab/projects/static/test/test.targz',
+                               decompressed=os.path.abspath('projects/testdata/testProject'))
+        tp = Project.objects.get(name='Test')
+        data = {'exp':'exp1',
+                'projectID' : tp.id ,
+                'selectedRuns' : ['run_1'],
+                'selectedData' : 'dominant.dat'
+                }
+        response = self.client.get(reverse('analysisField'), data=data)
+        self.assertEqual(response.status_code, 200)
+
+    def test_analysis_graphs_redirect(self):
+        # make sure the test project is proper
+        Project.objects.create(name='Test', source='avidalab/projects/static/test/test.targz',
+                               decompressed=os.path.abspath('projects/testdata/testProject'))
+        tp = Project.objects.get(name='Test')
+        data = {'exp': 'exp1',
+                'projectID': tp.id,
+                'newRuns': ['run_1'],
+                'data': 'dominant.dat',
+                'selectedField' : 'Update'
+                }
+        response = self.client.get(reverse('graphs'), data=data)
+        self.assertEqual(response.status_code, 200)
+
+
+    def test_analysis_stats_redirect(self):
+        # make sure the test project is proper
+        Project.objects.create(name='Test', source='avidalab/projects/static/test/test.targz',
+                               decompressed=os.path.abspath('projects/testdata/testProject'))
+        tp = Project.objects.get(name='Test')
+        data = {'exp': 'exp1',
+                'projectID': tp.id,
+                'newRuns': ['run_1'],
+                'data': 'dominant.dat',
+                'selectedField' : 'Update'
+                }
+        response = self.client.get(reverse('stats'), data=data)
+        self.assertEqual(response.status_code, 200)

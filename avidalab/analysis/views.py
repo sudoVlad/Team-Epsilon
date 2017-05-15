@@ -9,6 +9,31 @@ from projects.ParsingData import parseFile, mapData
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 import json
+import numpy as np
+
+# mean array maker takes an array of arrays and creates an array that contains the mean array as defined below
+# [1, 2, 3], [4, 5, 6], [7, 8, 9]
+# the result would be [6, 7.5, 9]
+#
+def mean_array_maker(arrays):
+    result = []
+    if len(arrays) == 0:
+        return result
+
+    min_size = len(arrays[0])
+
+    #grab the min size to make all arrays the same size
+    for array in arrays:
+        min_size = min(min_size, len(array))
+    # make all arrays the same size
+    for array in arrays:
+        result.append(array[:min_size])
+
+    #do the mean array stuff
+    np_arrays = np.array(result)
+    mean_array = np_arrays.mean(axis=0)
+    return mean_array
+
 # Create your views here.
 #def index(request):
 #    template = loader.get_template('analysis/analysis_index.html')

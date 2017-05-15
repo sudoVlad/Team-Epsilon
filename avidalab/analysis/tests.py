@@ -2,6 +2,7 @@ from django.test import TestCase
 from django.core.urlresolvers import resolve
 from django.http import HttpRequest
 from . pystats import *
+from . views import mean_array_maker
 from django.core.urlresolvers import reverse
 import os
 
@@ -63,3 +64,26 @@ class analysisTestCase(TestCase):
         test_project = Project.objects.get(name='TestThis')
         response = self.client.get(reverse('analyze', args=(test_project.id,)), follow=True)
         self.assertEqual(response.status_code, 200)
+
+    def test_mean_array_maker(self):
+        #test same length
+        arrays = [
+            [1, 2, 3, 4, 5],
+            [1, 2, 3, 4, 5],
+            [1, 2, 3, 4, 5],
+            [1, 2, 3, 4, 5]
+        ]
+        expected = [1.,2.,3.,4.,5.]
+        self.assertListEqual(mean_array_maker(arrays).tolist(), expected )
+
+
+        #test variable length
+        arrays = [
+            [1, 2, 3, 4, 5],
+            [1, 2, 3, 4, 5],
+            [1, 2, 3, 4, 5],
+            [1, 2, 3, 4]
+        ]
+        expected = [1, 2, 3, 4]
+        self.assertListEqual(mean_array_maker(arrays).tolist(), expected)
+

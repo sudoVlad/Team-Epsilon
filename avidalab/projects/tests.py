@@ -119,10 +119,6 @@ class ProjectPageTest(TestCase):
         dominantColNames = ["Update", "Average Merit of the Dominant Genotype", "Average Gestation Time of the Dominant Genotype", "Average Fitness of the Dominant Genotype", "Repro Rate?", "Size of Dominant Genotype", "Copied Size of Dominant Genotype", "Executed Size of Dominant Genotype", "Abundance of Dominant Genotype", "Number of Births", "Number of Dominant Breed True?", "Dominant Gene Depth", "Dominant Breed In", "Max Fitness?", "Genotype ID of Dominant Genotype", "Name of the Dominant Genotype"]
         self.assertEquals(columnNames, dominantColNames)
 
-    def test_parsing_data_function_for_dictionary(self):
-        dictionary = mapData('dominant.dat')
-        self.assertTrue(dictionary)
-
 
     def test_list_posting_data(self):
 

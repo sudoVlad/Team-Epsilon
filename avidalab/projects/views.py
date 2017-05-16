@@ -42,16 +42,49 @@ class createProjects(CreateView):
         return reverse_lazy('projects')
 '''
 
+from zipfile import ZipFile
+import os
+FULLPATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+def unpack_zip(zipfile='', path_from_local='', remove=False):
+    print(zipfile + ' '+ path_from_local)
+    filepath = path_from_local + zipfile
+    extract_path = path_from_local
+    parent_archive = ZipFile(filepath)
+    parent_archive.extractall(extract_path)
+    namelist = parent_archive.namelist()
+    parent_archive.close()
+    for name in namelist:
+        try:
+            unpack_zip(zipfile=name.split('/')[1], path_from_local=filepath.strip('.zip') + '\\', remove=True)
+
+        except:
+            continue
+
+    if remove:
+        os.remove(filepath)
+    return filepath.strip('.zip')
+
 def unzip(request, pk):
     print('in the view')
-    #we should be passed the project ID as data from the form ont he previous page
-    unzip_project(Project.objects.get(id=pk))
-    #we should call the unzip function on the source of the project grabbed from the ID
+    #grab the source files name
+    project = Project.objects.get(id=pk)
+    source_url = project.source.url
+    source_name = project.source.name
 
-    #we should then update the decompressed field on the project to be the directory of the unzipped files
-
-
+    print('=====')
+    print(FULLPATH)
+    source_name = os.path.basename(source_url)
+    print(source_name)
+    source_url = FULLPATH + '/' + source_url.split(source_name)[0]
+    print(source_url)
+    print('=====')
+    decpath = unpack_zip(zipfile=source_name,path_from_local=source_url)
+    project.decompressed = decpath
+    project.save()
     return HttpResponseRedirect(reverse('projects'))
+
+
 
 def list(request):
     # Handle file upload

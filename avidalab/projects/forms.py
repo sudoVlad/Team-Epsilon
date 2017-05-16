@@ -4,7 +4,7 @@ from django.core.exceptions import ValidationError
 
 def validate_file_extension(value):
 
-    if not value.name.endswith('.tar.gz'):
+    if not value.name.endswith('.zip'):
         raise ValidationError(u'Only Appropriate compressed files allowed')
 
 class ProjectForm(forms.Form):

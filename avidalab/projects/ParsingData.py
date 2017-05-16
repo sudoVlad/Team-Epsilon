@@ -42,23 +42,25 @@ def mapData(file):
     #Opening file
     with open(file, 'r') as f:
         for line in f:
-            #Regex matching to find column 1 - X
-            match = re.search(r'^#\s*[0-9]*:', line)
-            #Using the regex to
-            #Skip the comments to parse the data columns
-            if not match:
-                #Taking a line of data and breaking it into a list
-                #where each index of the list refers to each data column
-                data = line.split(" ")
-                #initialized i to 0 to access the keys
-                i = 0
-                #Parse through the list of data and put data at each index into
-                #the dictionary for each key
-                for column in data:
-                    #Strip the newline carriage because the last column will have one
-                    column = column.strip('\n')
-                    dictOfData[keys[i]].append(column)
-                    i += 1
+            #Kill comments
+            if line.startswith('#'):
+                continue
+            #kill blank lines
+            if line == '\n':
+                continue
+
+            #Taking a line of data and breaking it into a list
+            #where each index of the list refers to each data column
+            data = line.split(" ")
+            #initialized i to 0 to access the keys
+            i = 0
+            #Parse through the list of data and put data at each index into
+            #the dictionary for each key
+            for column in data:
+                #Strip the newline carriage because the last column will have one
+                column = column.strip('\n')
+                dictOfData[keys[i]].append(column)
+                i += 1
         f.close()
         #Return dictionary of the keys(name of each column) mapped to its values(list of data for each column)
         return dictOfData

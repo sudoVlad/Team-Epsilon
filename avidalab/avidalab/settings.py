@@ -32,7 +32,9 @@ ALLOWED_HOSTS = [
     'testserver',
     'localhost',
 ]
-
+STATICFILES_DIRS = [
+    'avidalab/analysis/static/graphs'
+]
 
 # Application definition
 

@@ -1,5 +1,5 @@
 #For grabbing the dictionary with data
-from ParsingData import parseFile, mapData
+from . ParsingData import parseFile, mapData
 
 #For graphing purposes
 import matplotlib.pyplot as plot

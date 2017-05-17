@@ -8,7 +8,7 @@ from projects.models import Project
 from projects.ParsingData import parseFile, mapData
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
-
+from . import graphData
 
 import json
 import numpy as np
@@ -155,12 +155,12 @@ def analysisGraphs(request):
         #then we get map data from the function
         all_the_dictionaries.append(mapData(full_path))
 
-
-    ##Get an array of graph images!
     graphs = []
-
-
-
+    ##Get an array of graph images!
+    graphData.graphScatter(all_the_dictionaries, field)
+    graphData.graphBoxAndWhisker(all_the_dictionaries, field)
+    graphData.graphLineGraph(all_the_dictionaries, field)
+    graphData.graphHistogram(all_the_dictionaries,field)
     return render(request,
                   'analysisGraphs.html',
                   {'test':'test',

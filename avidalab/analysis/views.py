@@ -9,6 +9,8 @@ from projects.ParsingData import parseFile, mapData
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from . import graphData
+import re
+from . pystats import *
 
 import json
 import numpy as np
@@ -185,21 +187,44 @@ def analysisStats(request):
     for run in runs:
         #start by getting the full path to the file
         full_path = path + '//' + exp + '//' + run + '//' + data
-        print(run)
+        #print(run)
         #then we get map data from the function
         all_the_dictionaries.append(mapData(full_path))
 
 
     ##Get an array of stats values!
     stats = []
+    listOfArrays = []
+    #stolen from graphData.py
+    #go through the dictionaries in made by each run
+    for dictionaries in all_the_dictionaries:
+        #get keys for each dict.
+        keys = dictionaries.keys()
+        #for each key check if thats the field we want to examine
+        for key in keys:
+            m = re.match(field, key, re.IGNORECASE)
+            if bool(m):
+                #if it is, add the array of values to our super list
+                listOfArrays.append(list(map(float, dictionaries[key])))
 
 
+    #pass the super list, the arrays of values for the chosen field in the dictionaries
+    # to mean_array_maker to make one super array
+
+    superList = mean_array_maker(listOfArrays)
+
+    stats.append(mean(superList))
+    stats.append(median(superList))
+    stats.append(standardDeviation(superList))
 
     return render(request,
                   'analysisStats.html',
                   {'test':'test',
                    'dictionarys':all_the_dictionaries,
-                   'stats':stats
+                   'stats':stats,
+                   'mean' : stats[0],
+                   'median' : stats[1],
+                   'standardDeviation': stats[2]
                    }
                   )
 

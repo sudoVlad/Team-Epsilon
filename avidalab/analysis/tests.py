@@ -58,7 +58,7 @@ class analysisTestCase(TestCase):
     def test_context_data_from_view(self):
 
         #first we must setup the test project
-        test_project = Project(name='TestThis',source='avidalab/projects/static/test/test.targz', decompressed=os.path.abspath('projects/testdata/testProject' ))
+        test_project = Project(name='TestThis',source='avidalab/projects/static/test/test.zip', decompressed=os.path.abspath('projects/testdata/testProject' ))
         print(test_project.decompressed)
         test_project.save()
         test_project = Project.objects.get(name='TestThis')
@@ -93,7 +93,7 @@ class analysisTestCase(TestCase):
 
     def test_analysis_detail_redirect(self):
         #make sure the test project is proper
-        Project.objects.create(name='Test', source='avidalab/projects/static/test/test.targz',
+        Project.objects.create(name='Test', source='avidalab/projects/static/test/test.zip',
                                decompressed=os.path.abspath('projects/testdata/testProject'))
         tp = Project.objects.get(name='Test')
         response = self.client.get(reverse('analyze', args=[tp.id]))
@@ -103,7 +103,7 @@ class analysisTestCase(TestCase):
 
     def test_analysis_runs_redirect(self):
         #make sure the test project is proper
-        Project.objects.create(name='Test', source='avidalab/projects/static/test/test.targz',
+        Project.objects.create(name='Test', source='avidalab/projects/static/test/test.zip',
                                decompressed=os.path.abspath('projects/testdata/testProject'))
         tp = Project.objects.get(name='Test')
         data = {'exp': 'exp1',
@@ -114,7 +114,7 @@ class analysisTestCase(TestCase):
 
     def test_analysis_field_redirect_no_runs(self):
         #make sure the test project is proper
-        Project.objects.create(name='Test', source='avidalab/projects/static/test/test.targz',
+        Project.objects.create(name='Test', source='avidalab/projects/static/test/test.zip',
                                decompressed=os.path.abspath('projects/testdata/testProject'))
         tp = Project.objects.get(name='Test')
         data = {'exp':'exp1',
@@ -125,7 +125,7 @@ class analysisTestCase(TestCase):
 
     def test_analysis_field_redirect(self):
         #make sure the test project is proper
-        Project.objects.create(name='Test', source='avidalab/projects/static/test/test.targz',
+        Project.objects.create(name='Test', source='avidalab/projects/static/test/test.zip',
                                decompressed=os.path.abspath('projects/testdata/testProject'))
         tp = Project.objects.get(name='Test')
         data = {'exp':'exp1',
@@ -138,7 +138,7 @@ class analysisTestCase(TestCase):
 
     def test_analysis_graphs_redirect(self):
         # make sure the test project is proper
-        Project.objects.create(name='Test', source='avidalab/projects/static/test/test.targz',
+        Project.objects.create(name='Test', source='avidalab/projects/static/test/test.zip',
                                decompressed=os.path.abspath('projects/testdata/testProject'))
         tp = Project.objects.get(name='Test')
         data = {'exp': 'exp1',
@@ -153,7 +153,7 @@ class analysisTestCase(TestCase):
 
     def test_analysis_stats_redirect(self):
         # make sure the test project is proper
-        Project.objects.create(name='Test', source='avidalab/projects/static/test/test.targz',
+        Project.objects.create(name='Test', source='avidalab/projects/static/test/test.zip',
                                decompressed=os.path.abspath('projects/testdata/testProject'))
         tp = Project.objects.get(name='Test')
         data = {'exp': 'exp1',

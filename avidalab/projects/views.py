@@ -7,7 +7,7 @@ from django.views.generic import UpdateView , DeleteView, ListView, CreateView
 from django.shortcuts import get_object_or_404
 from . models import Project
 from . forms import ProjectForm
-from . unzip import unzip_project
+
 
 class edit(UpdateView):
     model = Project

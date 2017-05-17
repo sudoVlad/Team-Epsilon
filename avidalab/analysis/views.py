@@ -9,8 +9,6 @@ from projects.ParsingData import parseFile, mapData
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 
-#To use graph functions
-from graphData import *
 
 import json
 import numpy as np

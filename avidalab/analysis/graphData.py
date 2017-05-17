@@ -83,6 +83,7 @@ def graphScatter(listOfDictionaries, fieldName):
 
     #Saving the plotted graph to /static/graphs/scatter_plot.png
     plot.savefig(results_dir + 'scatter_plot.png')
+    plot.clf()
 
 #Function for graphing histogram using the dictionary
 def graphHistogram(listOfDictionaries, fieldName):
@@ -112,7 +113,7 @@ def graphHistogram(listOfDictionaries, fieldName):
 
     #Saving the plotted graph to /static/graphs/histogram.png
     plot.savefig(results_dir + 'histogram.png')
-
+    plot.clf()
     #Displaying the graph
     #plot.show()
 
@@ -145,7 +146,7 @@ def graphLineGraph(listOfDictionaries, fieldName):
 
     #Saving the plotted graph to /static/graphs/line_graph.png
     plot.savefig(results_dir + 'line_graph.png')
-
+    plot.clf()
     #Displaying the graph
     #plot.show()
 
@@ -176,7 +177,7 @@ def graphBoxAndWhisker(listOfDictionaries, fieldName):
 
     #Saving the plotted graph to /static/graphs/box_and_whisker_plot.png
     plot.savefig(results_dir + 'box_and_whisker_plot.png')
-
+    plot.clf()
     #Displaying the graph
     #plot.show()
 

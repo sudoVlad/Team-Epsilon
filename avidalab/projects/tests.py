@@ -10,8 +10,7 @@ from django.db import models
 
 from django.core.files.uploadedfile import SimpleUploadedFile
 from . forms import ProjectForm
-from . import ParsingData
-from . ParsingData import mapData
+
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -113,11 +112,6 @@ class ProjectPageTest(TestCase):
         response = self.client.post(reverse('unzip', args=(test_project.id,)), follow=True)
         self.assertEquals(response.status_code, 200)
 
-
-    def test_parsing_data_function(self):
-        columnNames = ParsingData.parseFile('projects/testdata/dominant.dat')
-        dominantColNames = ["Update", "Average Merit of the Dominant Genotype", "Average Gestation Time of the Dominant Genotype", "Average Fitness of the Dominant Genotype", "Repro Rate?", "Size of Dominant Genotype", "Copied Size of Dominant Genotype", "Executed Size of Dominant Genotype", "Abundance of Dominant Genotype", "Number of Births", "Number of Dominant Breed True?", "Dominant Gene Depth", "Dominant Breed In", "Max Fitness?", "Genotype ID of Dominant Genotype", "Name of the Dominant Genotype"]
-        self.assertEquals(columnNames, dominantColNames)
 
 
     def test_list_posting_data(self):

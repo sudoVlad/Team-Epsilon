@@ -24,6 +24,7 @@ class ProjectPageTest(TestCase):
     def test_that_project_model(self):
         test_project = Project.objects.create(name='Test2',source=TESTSOURCE )
         test_project.save()
+
         self.assertTrue(isinstance(test_project, Project))
 
 
